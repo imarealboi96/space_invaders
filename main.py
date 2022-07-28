@@ -19,11 +19,13 @@ playerY = 480
 playerX_change = 0
 
 # Enemy
-enemyImg = pygame.image.load('enemy.png')
+enemyimg= pygame.image.load('enemy.png')
 enemyX = random.randint(0, 800)
 enemyY = random.randint(50, 150)
-enemyX_change = 0.3
-enemyY_change = 40
+enemyX_change = 0.1
+enemyY_change = 100
+def enemy(x, y):
+    screen.blit(enemyimg, (x, y))
 
 # Ready - You can't see the bullet on the screen
 # Fire - The bullet is currently moving
@@ -43,6 +45,8 @@ def player(x, y):
 # Game Loop
 running = True
 while running:
+    
+
 
     # RGB - Red, Green, Blue
     screen.fill((0, 0, 0))
@@ -68,5 +72,15 @@ while running:
     playerX += playerX_change
 
     player(playerX, playerY)
+
+    enemyX += enemyX_change
+    
+    if enemyX <=150:
+        enemyX_change = 0.1
+        enemyY += enemyY_change
+    elif enemyX >= 736:
+        enemyX_change = -0.1
+        enemyY += enemyY_change 
+    enemy(enemyX, enemyY)
     # Update screen
     pygame.display.update()
